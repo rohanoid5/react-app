@@ -1,26 +1,65 @@
-import React, { Component } from 'react';
-import FusionCharts from 'fusioncharts';
-import Charts from 'fusioncharts/fusioncharts.charts';
-import ReactFC from 'react-fusioncharts';
-import data from './data.json';
-// import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
+import React, { Component } from "react";
+import FusionCharts from "fusioncharts/core";
+import Column2D from "fusioncharts/viz/column2d";
+import ReactFC from "react-fusioncharts";
+import FusionTheme from "fusioncharts/themes/es/fusioncharts.theme.fusion";
 
-ReactFC.fcRoot(FusionCharts, Charts);
+import data from "./data.json";
+
+ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
 const chartConfigs = {
-  type: 'column2d',
-  width: 600,
-  height: 400,
-  dataFormat: 'json',
+  type: "column2d",
+  width: "100%",
+  height: "80%",
+  dataFormat: "json",
   dataSource: data
 };
 
-class SimpleColumn2D extends Component {
-  render () {
+class Chart extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      actualValue: "Hover on the plot to see the value along with the label",
+      message: "Hover on the plot to see the value along with the label"
+    };
+
+    this.dataplotrollover = this.dataplotrollover.bind(this);
+    this.dataplotrollout = this.dataplotrollout.bind(this);
+  }
+
+  dataplotrollover(eventObj, dataObj) {
+    this.setState({
+      message: [
+        "You are currently hovering over ",
+        <strong>{dataObj.categoryLabel}</strong>,
+        " whose value is ",
+        <strong>{dataObj.displayValue}</strong>
+      ]
+    });
+  }
+
+  dataplotrollout(eventObj, dataObj) {
+    this.setState({
+      message: this.state.actualValue
+    });
+  }
+
+  render() {
     return (
-      <ReactFC {...chartConfigs} />
-    )
+      <div>
+        <ReactFC
+          {...chartConfigs}
+          fcEvent-dataplotRollOver={this.dataplotrollover}
+          fcEvent-dataplotRollOut={this.dataplotrollout}
+        />
+        <p style={{ padding: "10px", background: "#f5f2f0" }}>
+          {this.state.message}
+        </p>
+      </div>
+    );
   }
 }
 
-export default SimpleColumn2D;
+export default Chart;

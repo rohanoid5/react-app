@@ -1,26 +1,25 @@
-import React, { Component } from 'react';
-import FusionCharts from 'fusioncharts';
-import Charts from 'fusioncharts/fusioncharts.charts';
-import ReactFC from 'react-fusioncharts';
-import data from './data.json';
-// import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
+import React, { Component } from "react";
+import FusionCharts from "fusioncharts/core";
+import Maps from "fusioncharts/maps";
+import World from "fusioncharts/maps/es/fusioncharts.world";
+import ReactFC from "react-fusioncharts";
+import FusionTheme from "fusioncharts/themes/es/fusioncharts.theme.fusion";
+import data from "./data.json";
 
-ReactFC.fcRoot(FusionCharts, Charts);
+ReactFC.fcRoot(FusionCharts, Maps, World, FusionTheme);
 
 const chartConfigs = {
-  type: 'column2d',
-  width: 600,
-  height: 400,
-  dataFormat: 'json',
+  type: "world",
+  width: "100%",
+  height: "100%",
+  dataFormat: "json",
   dataSource: data
 };
 
-class SimpleColumn2D extends Component {
-  render () {
-    return (
-      <ReactFC {...chartConfigs} />
-    )
+class Chart extends Component {
+  render() {
+    return <ReactFC {...chartConfigs} />;
   }
 }
 
-export default SimpleColumn2D;
+export default Chart;
