@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
-import FusionCharts from 'fusioncharts/core';
-import Column2D from 'fusioncharts/viz/column2d';
+import FusionCharts from 'fusioncharts';
+import Column2D from 'fusioncharts/fusioncharts.charts';
 import ReactFC from 'react-fusioncharts';
-import FusionTheme from 'fusioncharts/themes/es/fusioncharts.theme.fusion';
-import GammelTheme from 'fusioncharts/themes/es/fusioncharts.theme.gammel';
-import CandyTheme from 'fusioncharts/themes/es/fusioncharts.theme.candy';
-import ZuneTheme from 'fusioncharts/themes/es/fusioncharts.theme.zune';
-import OceanTheme from 'fusioncharts/themes/es/fusioncharts.theme.ocean';
-import CarbonTheme from 'fusioncharts/themes/es/fusioncharts.theme.carbon';
+import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
+import GammelTheme from 'fusioncharts/themes/fusioncharts.theme.gammel';
+import CandyTheme from 'fusioncharts/themes/fusioncharts.theme.candy';
+import ZuneTheme from 'fusioncharts/themes/fusioncharts.theme.zune';
+import OceanTheme from 'fusioncharts/themes/fusioncharts.theme.ocean';
+import CarbonTheme from 'fusioncharts/themes/fusioncharts.theme.carbon';
 import data from './data.json';
 
-ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme, GammelTheme, CandyTheme, ZuneTheme, OceanTheme, CarbonTheme);
+ReactFC.fcRoot(
+  FusionCharts,
+  Column2D,
+  FusionTheme,
+  GammelTheme,
+  CandyTheme,
+  ZuneTheme,
+  OceanTheme,
+  CarbonTheme
+);
 
 const chartConfigs = {
   type: 'column2d',
@@ -54,27 +63,57 @@ class Chart extends Component {
           <span>Choose a theme:</span>
           <div className="change-type">
             <div>
-              <input type="radio" value="fusion" onChange={this.radioHandler} checked={this.state.currentVal === 'fusion'} />
+              <input
+                type="radio"
+                value="fusion"
+                onChange={this.radioHandler}
+                checked={this.state.currentVal === 'fusion'}
+              />
               <label>Fusion</label>
             </div>
             <div>
-              <input type="radio" value="gammel" onChange={this.radioHandler} checked={this.state.currentVal === 'gammel'} />
+              <input
+                type="radio"
+                value="gammel"
+                onChange={this.radioHandler}
+                checked={this.state.currentVal === 'gammel'}
+              />
               <label>Gammel</label>
             </div>
             <div>
-              <input type="radio" value="candy" onChange={this.radioHandler} checked={this.state.currentVal === 'candy'} />
+              <input
+                type="radio"
+                value="candy"
+                onChange={this.radioHandler}
+                checked={this.state.currentVal === 'candy'}
+              />
               <label>Candy</label>
             </div>
             <div>
-              <input type="radio" value="zune" onChange={this.radioHandler} checked={this.state.currentVal === 'zune'} />
+              <input
+                type="radio"
+                value="zune"
+                onChange={this.radioHandler}
+                checked={this.state.currentVal === 'zune'}
+              />
               <label>Zune</label>
             </div>
             <div>
-              <input type="radio" value="ocean" onChange={this.radioHandler} checked={this.state.currentVal === 'ocean'} />
+              <input
+                type="radio"
+                value="ocean"
+                onChange={this.radioHandler}
+                checked={this.state.currentVal === 'ocean'}
+              />
               <label>Ocean</label>
             </div>
             <div>
-              <input type="radio" value="carbon" onChange={this.radioHandler} checked={this.state.currentVal === 'carbon'} />
+              <input
+                type="radio"
+                value="carbon"
+                onChange={this.radioHandler}
+                checked={this.state.currentVal === 'carbon'}
+              />
               <label>Carbon</label>
             </div>
           </div>

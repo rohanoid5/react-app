@@ -1,31 +1,44 @@
 import React, { Component } from 'react';
-import Header from './Header'
-import Banner from './Banner'
-import Feature from './Feature'
-import Samples from './Samples'
-import Info from './Info'
-import Footer from './Footer'
+import Header from './Header';
+import Banner from './Banner';
+import Feature from './Feature';
+import Samples from './Samples';
+import Info from './Info';
+import Footer from './Footer';
+import InfoFusionCharts from './Info/FusionChartsInfo';
 
 import '../assets/css/codemirror.css';
 import '../assets/css/dracula.css';
 
 // import logo from './logo.svg';
-// import './App.css';
+import './App.css';
 // import 'bootstrap/dist/css/bootstrap.css';
 import 'prismjs/prism.js';
 import 'prismjs/themes/prism.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    var locationArr = window.location.pathname.split('/');
+    if (locationArr.length < 3)
+      localStorage.setItem('isFusionTime', 'fusioncharts');
+
+    this.state = {
+      isFusionTime: localStorage.getItem('isFusionTime') === 'timeseries'
+    };
+  }
+
   render() {
     return (
       <div>
-        <Header/>
+        <Header />
         <div className="page-container">
-          <Banner/>
-          <Feature/>
-          <Samples/>
-          <Info/>
-          <Footer/>
+          <Banner />
+          <Feature />
+          <Samples />
+          <Info />
+          <Footer />
         </div>
       </div>
     );

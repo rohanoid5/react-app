@@ -1,17 +1,14 @@
-
-@keyframes App-logo-spin {
+/* @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
-}
+} */
 
-
-
-.codepreview pre {
+/* .codepreview pre {
   height: 592px;
-}
+} */
 
 /* From the passportjs.org website */
-.masthead {
+/* .masthead {
 margin-bottom: 20px;
 padding-bottom: 5px;
 border-bottom: 1px solid #eeeeee;
@@ -99,5 +96,19 @@ border-top: none;
 .list-group nav .list-group-item.active {
 color: #333333;
 background-color: #f1f1f1;
+} */
+
+.badge {
+  font-size: 12px !important;
+  border-radius: 5px;
+  align-self: center;
 }
 
+.badge-selected {
+  background-color: white;
+}
+
+.badge-normal {
+  background-color: rgb(75, 63, 160);
+  color: white;
+}
