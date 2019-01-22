@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import FusionCharts from "fusioncharts/core";
-import Column2D from "fusioncharts/viz/column2d";
-import ReactFC from "react-fusioncharts";
-import FusionTheme from "fusioncharts/themes/es/fusioncharts.theme.fusion";
+import React, { Component } from 'react';
+import FusionCharts from 'fusioncharts';
+import Column2D from 'fusioncharts/fusioncharts.charts';
+import ReactFC from 'react-fusioncharts';
+import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 
-import data from "./data.json";
+import data from './data.json';
 
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
 const chartConfigs = {
-  type: "column2d",
-  width: "600",
-  height: "350",
-  dataFormat: "json",
+  type: 'column2d',
+  width: '600',
+  height: '350',
+  dataFormat: 'json',
   dataSource: data
 };
 
@@ -22,7 +22,7 @@ class Chart extends Component {
 
     this.state = {
       chart: {},
-      currentVal: "medium"
+      currentVal: 'medium'
     };
 
     this.renderComplete = this.renderComplete.bind(this);
@@ -30,21 +30,21 @@ class Chart extends Component {
   }
 
   renderComplete(chart) {
-    this.setState({chart});
+    this.setState({ chart });
   }
 
   // Handler for radio buttons to change chart size.
   radioHandler(e) {
     switch (e.currentTarget.value) {
-      case "small":
+      case 'small':
         this.state.chart.resizeTo(400, 250);
         break;
 
-      case "medium":
+      case 'medium':
         this.state.chart.resizeTo(600, 350);
         break;
 
-      case "large":
+      case 'large':
         this.state.chart.resizeTo(700, 400);
         break;
     }
@@ -66,7 +66,7 @@ class Chart extends Component {
                 type="radio"
                 value="small"
                 onChange={this.radioHandler}
-                checked={this.state.currentVal === "small"}
+                checked={this.state.currentVal === 'small'}
               />
               <label>400 x 250</label>
             </div>
@@ -75,7 +75,7 @@ class Chart extends Component {
                 type="radio"
                 value="medium"
                 onChange={this.radioHandler}
-                checked={this.state.currentVal === "medium"}
+                checked={this.state.currentVal === 'medium'}
               />
               <label>600 x 350</label>
             </div>
@@ -84,7 +84,7 @@ class Chart extends Component {
                 type="radio"
                 value="large"
                 onChange={this.radioHandler}
-                checked={this.state.currentVal === "large"}
+                checked={this.state.currentVal === 'large'}
               />
               <label>700 x 400</label>
             </div>

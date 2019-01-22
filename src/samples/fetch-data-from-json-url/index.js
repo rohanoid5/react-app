@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import FusionCharts from 'fusioncharts/core';
-import Column2D from 'fusioncharts/viz/column2d';
+import FusionCharts from 'fusioncharts';
+import Column2D from 'fusioncharts/fusioncharts.charts';
 import ReactFC from 'react-fusioncharts';
-import FusionTheme from 'fusioncharts/themes/es/fusioncharts.theme.fusion';
+import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
+
+import data from './data.json';
 
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
@@ -15,10 +17,8 @@ const chartConfigs = {
 };
 
 class Chart extends Component {
-  render () {
-    return (
-      <ReactFC {...chartConfigs} />
-    )
+  render() {
+    return <ReactFC {...chartConfigs} />;
   }
 }
 

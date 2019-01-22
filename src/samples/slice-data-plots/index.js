@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import FusionCharts from "fusioncharts/core";
-import Pie2D from "fusioncharts/viz/pie2d";
-import ReactFC from "react-fusioncharts";
-import FusionTheme from "fusioncharts/themes/es/fusioncharts.theme.fusion";
+import React, { Component } from 'react';
+import FusionCharts from 'fusioncharts';
+import Charts from 'fusioncharts/fusioncharts.charts';
+import ReactFC from 'react-fusioncharts';
+import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 
-import data from "./data.json";
+import data from './data.json';
 
-ReactFC.fcRoot(FusionCharts, Pie2D, FusionTheme);
+ReactFC.fcRoot(FusionCharts, Charts, FusionTheme);
 
 const chartConfigs = {
-  type: "Pie2D",
-  width: "100%",
+  type: 'Pie2D',
+  width: '100%',
   height: 400,
-  dataFormat: "json",
+  dataFormat: 'json',
   dataSource: data
 };
 
@@ -22,7 +22,7 @@ class Chart extends Component {
 
     this.state = {
       chart: {},
-      currentVal: "none"
+      currentVal: 'none'
     };
 
     this.renderComplete = this.renderComplete.bind(this);
@@ -36,7 +36,7 @@ class Chart extends Component {
 
   // Handler for radio buttons to slice data plot.
   radioHandler(e) {
-    if (e.currentTarget.value === "none") {
+    if (e.currentTarget.value === 'none') {
       this.state.chart.options.dataSource.data.map((data, index) => {
         this.state.chart.slicePlotItem(index, false);
       });
@@ -52,7 +52,7 @@ class Chart extends Component {
   // Makes the relevant radio active when a plot is clicked.
   sliceClicked(eventObj, dataObj) {
     this.setState({
-      currentVal: eventObj.data.isSliced ? "none" : eventObj.data.dataIndex
+      currentVal: eventObj.data.isSliced ? 'none' : eventObj.data.dataIndex
     });
   }
 
@@ -73,7 +73,7 @@ class Chart extends Component {
                 type="radio"
                 value="none"
                 onChange={this.radioHandler}
-                checked={this.state.currentVal === "none"}
+                checked={this.state.currentVal === 'none'}
               />
               <label>None</label>
             </div>

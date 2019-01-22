@@ -1,29 +1,29 @@
-import React, { Component } from "react";
-import FusionCharts from "fusioncharts/core";
-import Column2D from "fusioncharts/viz/column2d";
-import ReactFC from "react-fusioncharts";
-import FusionTheme from "fusioncharts/themes/es/fusioncharts.theme.fusion";
+import React, { Component } from 'react';
+import FusionCharts from 'fusioncharts';
+import Column2D from 'fusioncharts/fusioncharts.charts';
+import ReactFC from 'react-fusioncharts';
+import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 
-import data from "./data.json";
+import data from './data.json';
 
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
 const chartConfigs = {
-  type: "column2d",
-  width: "100%",
-  height: "80%",
-  dataFormat: "json",
+  type: 'column2d',
+  width: '100%',
+  height: '80%',
+  dataFormat: 'json',
   dataSource: data
 };
 
-var defaultMessage = "Click on the plot to see the value along with the label";
+var defaultMessage = 'Click on the plot to see the value along with the label';
 
 class Chart extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      message: "",
+      message: '',
       enabled: false
     };
 
@@ -33,7 +33,7 @@ class Chart extends Component {
   }
 
   trackPlotClick() {
-    FusionCharts.addEventListener("dataplotClick", this.dataPlotClick);
+    FusionCharts.addEventListener('dataplotClick', this.dataPlotClick);
     this.setState({
       message: defaultMessage,
       enabled: true
@@ -43,18 +43,18 @@ class Chart extends Component {
   dataPlotClick(eventObj, dataObj) {
     this.setState({
       message: [
-        "You have clicked on plot ",
+        'You have clicked on plot ',
         <strong>{dataObj.categoryLabel}</strong>,
-        " whose value is ",
+        ' whose value is ',
         <strong>{dataObj.displayValue}</strong>
       ]
     });
   }
 
   resetChart() {
-    FusionCharts.removeEventListener("dataplotClick", this.dataPlotClick);
+    FusionCharts.removeEventListener('dataplotClick', this.dataPlotClick);
     this.setState({
-      message: "",
+      message: '',
       enabled: false
     });
   }
@@ -63,8 +63,9 @@ class Chart extends Component {
     return (
       <div>
         <ReactFC {...chartConfigs} />
-        <div style={{ padding: "5px" }} id="message">
-          {this.state.message || "Click the below buttons to add an event dynamically to a chart"}
+        <div style={{ padding: '5px' }} id="message">
+          {this.state.message ||
+            'Click the below buttons to add an event dynamically to a chart'}
         </div>
         <button
           className="btn btn-outline-secondary btn-sm"
