@@ -1,27 +1,26 @@
-import React, { Component } from "react";
-import FusionCharts from "fusioncharts/core";
-import Column2D from "fusioncharts/viz/column2d";
-import StackedColumn2D from "fusioncharts/viz/stackedcolumn2d";
-import ReactFC from "react-fusioncharts";
-import FusionTheme from "fusioncharts/themes/es/fusioncharts.theme.fusion";
+import React, { Component } from 'react';
+import FusionCharts from 'fusioncharts';
+import Column2D from 'fusioncharts/fusioncharts.charts';
+import ReactFC from 'react-fusioncharts';
+import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 
-import data1 from "./data1.json";
-import data2 from "./data2.json";
+import data1 from './data1.json';
+import data2 from './data2.json';
 
-ReactFC.fcRoot(FusionCharts, Column2D, StackedColumn2D, FusionTheme);
+ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
 const chart1Configs = {
-  type: "column2d",
+  type: 'column2d',
   width: 700,
   height: 400,
-  dataFormat: "json",
+  dataFormat: 'json',
   dataSource: data1
 };
 const chart2Configs = {
-  type: "stackedcolumn2d",
+  type: 'stackedcolumn2d',
   width: 600,
   height: 500,
-  dataFormat: "json",
+  dataFormat: 'json',
   dataSource: data2
 };
 
@@ -33,7 +32,7 @@ class Chart extends Component {
 
   exportChart(e) {
     FusionCharts.batchExport({
-      exportFormat: "pdf"
+      exportFormat: 'pdf'
     });
   }
 

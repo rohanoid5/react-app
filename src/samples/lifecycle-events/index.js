@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import FusionCharts from "fusioncharts/core";
-import Column2D from "fusioncharts/viz/column2d";
-import ReactFC from "react-fusioncharts";
-import FusionTheme from "fusioncharts/themes/es/fusioncharts.theme.fusion";
+import React, { Component } from 'react';
+import FusionCharts from 'fusioncharts';
+import Column2D from 'fusioncharts/fusioncharts.charts';
+import ReactFC from 'react-fusioncharts';
+import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 
-import data from "./data.json";
+import data from './data.json';
 
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
 const chartConfigs = {
-  type: "column2d",
-  width: "100%",
-  height: "85%",
-  dataFormat: "json",
+  type: 'column2d',
+  width: '100%',
+  height: '85%',
+  dataFormat: 'json',
   dataSource: data
 };
 
@@ -22,7 +22,7 @@ class Chart extends Component {
 
     this.state = {
       message: [
-        "You will see notifications here for the chart lifecycle events"
+        'You will see notifications here for the chart lifecycle events'
       ]
     };
 
@@ -33,12 +33,12 @@ class Chart extends Component {
   }
 
   beforeDataUpdate() {
-    this.state.message = [<strong>Status: </strong>, " beforeDataUpdate"];
+    this.state.message = [<strong>Status: </strong>, ' beforeDataUpdate'];
   }
 
   dataUpdated() {
     let newMessage = this.state.message.slice();
-    newMessage.push(", dataUpdated");
+    newMessage.push(', dataUpdated');
     this.setState({
       message: newMessage
     });
@@ -46,7 +46,7 @@ class Chart extends Component {
 
   drawComplete() {
     let newMessage = this.state.message.slice();
-    newMessage.push(", drawComplete");
+    newMessage.push(', drawComplete');
     this.setState({
       message: newMessage
     });
@@ -54,7 +54,7 @@ class Chart extends Component {
 
   renderComplete() {
     let newMessage = this.state.message.slice();
-    newMessage.push(", renderComplete");
+    newMessage.push(', renderComplete');
     this.setState({
       message: newMessage
     });
@@ -70,7 +70,7 @@ class Chart extends Component {
           fcEvent-drawComplete={this.drawComplete}
           fcEvent-renderComplete={this.renderComplete}
         />
-        <p style={{ padding: "10px", background: "#f5f2f0" }}>
+        <p style={{ padding: '10px', background: '#f5f2f0' }}>
           {this.state.message}
         </p>
       </div>
