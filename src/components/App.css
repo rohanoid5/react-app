@@ -112,3 +112,8 @@ background-color: #f1f1f1;
   background-color: rgb(75, 63, 160);
   color: white;
 }
+
+.code {
+  color: #dd5ec7;
+  word-break: break-word;
+}

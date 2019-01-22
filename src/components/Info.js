@@ -1,9 +1,9 @@
 import React from 'react';
-import CodeMirror from "react-codemirror";
+import CodeMirror from 'react-codemirror';
 import 'codemirror/mode/javascript/javascript';
 
 var options = {
-  tabSize: "4",
+  tabSize: '4',
   smartIndent: true,
   lineNumbers: true,
   readOnly: true,
@@ -58,75 +58,89 @@ var chartJSON = {
 };
 
 var mapsJSON = {
-  "chart": {
-      "caption": "Average Annual Population Growth",
-      "subcaption": " 1955-2015",
-      "numbersuffix": "%",
-      "includevalueinlabels": "1",
-      "labelsepchar": ": ",
-      "entityFillHoverColor": "#FFF9C4",
-      "theme": "fusion"
+  chart: {
+    caption: 'Average Annual Population Growth',
+    subcaption: ' 1955-2015',
+    numbersuffix: '%',
+    includevalueinlabels: '1',
+    labelsepchar: ': ',
+    entityFillHoverColor: '#FFF9C4',
+    theme: 'fusion'
   },
-  "colorrange": {
-      "minvalue": "0",
-      "code": "#FFE0B2",
-      "gradient": "1",
-      "color": [
-          {
-              "minvalue": "0.5",
-              "maxvalue": "1.0",
-              "color": "#FFD74D"
-          },
-          {
-              "minvalue": "1.0",
-              "maxvalue": "2.0",
-              "color": "#FB8C00"
-          },
-          {
-              "minvalue": "2.0",
-              "maxvalue": "3.0",
-              "color": "#E65100"
-          }
-      ]
-  },
-  "data": [
+  colorrange: {
+    minvalue: '0',
+    code: '#FFE0B2',
+    gradient: '1',
+    color: [
       {
-          "id": "NA",
-          "value": ".82",
-          "showLabel": "1"
+        minvalue: '0.5',
+        maxvalue: '1.0',
+        color: '#FFD74D'
       },
       {
-          "id": "SA",
-          "value": "2.04",
-          "showLabel": "1"
+        minvalue: '1.0',
+        maxvalue: '2.0',
+        color: '#FB8C00'
       },
       {
-          "id": "AS",
-          "value": "1.78",
-          "showLabel": "1"
-      },
-      {
-          "id": "EU",
-          "value": ".40",
-          "showLabel": "1"
-      },
-      {
-          "id": "AF",
-          "value": "2.58",
-          "showLabel": "1"
-      },
-      {
-          "id": "AU",
-          "value": "1.30",
-          "showLabel": "1"
+        minvalue: '2.0',
+        maxvalue: '3.0',
+        color: '#E65100'
       }
+    ]
+  },
+  data: [
+    {
+      id: 'NA',
+      value: '.82',
+      showLabel: '1'
+    },
+    {
+      id: 'SA',
+      value: '2.04',
+      showLabel: '1'
+    },
+    {
+      id: 'AS',
+      value: '1.78',
+      showLabel: '1'
+    },
+    {
+      id: 'EU',
+      value: '.40',
+      showLabel: '1'
+    },
+    {
+      id: 'AF',
+      value: '2.58',
+      showLabel: '1'
+    },
+    {
+      id: 'AU',
+      value: '1.30',
+      showLabel: '1'
+    }
   ]
 };
 
-var code1 = "import React from 'react';\nimport ReactDOM from 'react-dom';\nimport FusionCharts from 'fusioncharts';\nimport Charts from 'fusioncharts/fusioncharts.charts';\nimport ReactFC from 'react-fusioncharts';\nimport FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';\n\nReactFC.fcRoot(FusionCharts, Charts, FusionTheme);\n\nconst myDataSource = " + JSON.stringify(chartJSON, null, "\t") + ";\n\nconst chartConfigs = {\n  \ttype: 'column2d',\n  \twidth: 600,\n  \theight: 400,\n  \tdataFormat: 'json',\n  \tdataSource: myDataSource,\n};\n\nReactDOM.render(\n  \t<ReactFC {...chartConfigs} />,\n  \tdocument.getElementById('root'),\n);";
-var code2 = "import React from 'react';\nimport ReactDOM from 'react-dom';\nimport FusionCharts from 'fusioncharts';\nimport Maps from 'fusioncharts/fusioncharts.maps';\nimport World from 'fusioncharts/maps/fusioncharts.world';\nimport ReactFC from 'react-fusioncharts';\nimport FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';\n\nReactFC.fcRoot(FusionCharts, Maps, World, FusionTheme);\n\nconst myDataSource = " + JSON.stringify(mapsJSON, null, "\t") + ";\n\nconst chartConfigs = {\n  \ttype: 'world',\n  \twidth: 600,\n  \theight: 400,\n  \tdataFormat: 'json',\n  \tdataSource: myDataSource,\n};\n\nReactDOM.render(\n  \t<ReactFC {...chartConfigs} />,\n  \tdocument.getElementById('root'),\n);";
-var code3 = "import React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport FusionCharts from 'fusioncharts';\nimport Charts from 'fusioncharts/fusioncharts.charts';\nimport ReactFC from 'react-fusioncharts';\nimport FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';\n\nReactFC.fcRoot(FusionCharts, Charts, FusionTheme);\n\nconst myDataSource = " + JSON.stringify(chartJSON, null, "\t") + ";\n\nconst chartConfigs = {\n  type: 'column2d',\n  width: 600,\n  height: 400,\n  dataFormat: 'json',\n  dataSource: myDataSource,\n};\n\nclass Chart extends Component {\n  constructor(props) {\n    super(props);\n\n    this.state = {\n      actualValue: 'Hover on the plot to see the value along with the label',\n    };\n\n    this.showPlotValue = this.showPlotValue.bind(this);\n  }\n\n  // Event callback handler for 'dataplotRollOver'.\n  // Shows the value of the hovered plot on the page.\n  showPlotValue(eventObj, dataObj) {\n    this.setState({\n      actualValue: `You’re are currently hovering over ${dataObj.categoryLabel} whose value is ${dataObj.displayValue}`,\n    });\n  }\n\n  render() {\n    return (\n      <div>\n        <ReactFC {...chartConfigs} fcEvent-dataplotRollOver={this.showPlotValue} />\n        <p style={{ padding: '10px', background: '#f5f2f0' }}>{this.state.actualValue}</p>\n      </div>\n    );\n  }\n}\n\nReactDOM.render(\n  <Chart />,\n  document.getElementById('root'),\n);";
-var code4 = "import React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport FusionCharts from 'fusioncharts';\nimport Charts from 'fusioncharts/fusioncharts.charts';\nimport ReactFC from 'react-fusioncharts';\nimport FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';\n\nReactFC.fcRoot(FusionCharts, Charts, FusionTheme);\n\nconst myDataSource = " + JSON.stringify(chartJSON, null, "\t") + ";\n\nconst chartConfigs = {\n  type: 'column2d',\n  width: 600,\n  height: 400,\n  dataFormat: 'json',\n  dataSource: myDataSource,\n};\n\nclass Chart extends Component {\n  // Convert the chart to a 2D Pie chart after 5 secs.\n  alterChart(chart) {\n    setTimeout(() => {\n      chart.chartType('pie2d');\n    }, 5000);\n  }\n\n  render() {\n    return (\n      <div>\n        <ReactFC {...chartConfigs} onRender={alterChart} />\n      </div>\n    );\n  }\n}\n\nReactDOM.render(\n  <Chart />,\n  document.getElementById('root'),\n);";
+var code1 =
+  "import React from 'react';\nimport ReactDOM from 'react-dom';\nimport FusionCharts from 'fusioncharts';\nimport Charts from 'fusioncharts/fusioncharts.charts';\nimport ReactFC from 'react-fusioncharts';\nimport FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';\n\nReactFC.fcRoot(FusionCharts, Charts, FusionTheme);\n\nconst myDataSource = " +
+  JSON.stringify(chartJSON, null, '\t') +
+  ";\n\nconst chartConfigs = {\n  \ttype: 'column2d',\n  \twidth: 600,\n  \theight: 400,\n  \tdataFormat: 'json',\n  \tdataSource: myDataSource,\n};\n\nReactDOM.render(\n  \t<ReactFC {...chartConfigs} />,\n  \tdocument.getElementById('root'),\n);";
+var code2 =
+  "import React from 'react';\nimport ReactDOM from 'react-dom';\nimport FusionCharts from 'fusioncharts';\nimport Maps from 'fusioncharts/fusioncharts.maps';\nimport World from 'fusioncharts/maps/fusioncharts.world';\nimport ReactFC from 'react-fusioncharts';\nimport FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';\n\nReactFC.fcRoot(FusionCharts, Maps, World, FusionTheme);\n\nconst myDataSource = " +
+  JSON.stringify(mapsJSON, null, '\t') +
+  ";\n\nconst chartConfigs = {\n  \ttype: 'world',\n  \twidth: 600,\n  \theight: 400,\n  \tdataFormat: 'json',\n  \tdataSource: myDataSource,\n};\n\nReactDOM.render(\n  \t<ReactFC {...chartConfigs} />,\n  \tdocument.getElementById('root'),\n);";
+var code3 =
+  "import React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport FusionCharts from 'fusioncharts';\nimport Charts from 'fusioncharts/fusioncharts.charts';\nimport ReactFC from 'react-fusioncharts';\nimport FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';\n\nReactFC.fcRoot(FusionCharts, Charts, FusionTheme);\n\nconst myDataSource = " +
+  JSON.stringify(chartJSON, null, '\t') +
+  ";\n\nconst chartConfigs = {\n  type: 'column2d',\n  width: 600,\n  height: 400,\n  dataFormat: 'json',\n  dataSource: myDataSource,\n};\n\nclass Chart extends Component {\n  constructor(props) {\n    super(props);\n\n    this.state = {\n      actualValue: 'Hover on the plot to see the value along with the label',\n    };\n\n    this.showPlotValue = this.showPlotValue.bind(this);\n  }\n\n  // Event callback handler for 'dataplotRollOver'.\n  // Shows the value of the hovered plot on the page.\n  showPlotValue(eventObj, dataObj) {\n    this.setState({\n      actualValue: `You’re are currently hovering over ${dataObj.categoryLabel} whose value is ${dataObj.displayValue}`,\n    });\n  }\n\n  render() {\n    return (\n      <div>\n        <ReactFC {...chartConfigs} fcEvent-dataplotRollOver={this.showPlotValue} />\n        <p style={{ padding: '10px', background: '#f5f2f0' }}>{this.state.actualValue}</p>\n      </div>\n    );\n  }\n}\n\nReactDOM.render(\n  <Chart />,\n  document.getElementById('root'),\n);";
+var code4 =
+  "import React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport FusionCharts from 'fusioncharts';\nimport Charts from 'fusioncharts/fusioncharts.charts';\nimport ReactFC from 'react-fusioncharts';\nimport FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';\n\nReactFC.fcRoot(FusionCharts, Charts, FusionTheme);\n\nconst myDataSource = " +
+  JSON.stringify(chartJSON, null, '\t') +
+  ";\n\nconst chartConfigs = {\n  type: 'column2d',\n  width: 600,\n  height: 400,\n  dataFormat: 'json',\n  dataSource: myDataSource,\n};\n\nclass Chart extends Component {\n  // Convert the chart to a 2D Pie chart after 5 secs.\n  alterChart(chart) {\n    setTimeout(() => {\n      chart.chartType('pie2d');\n    }, 5000);\n  }\n\n  render() {\n    return (\n      <div>\n        <ReactFC {...chartConfigs} onRender={alterChart} />\n      </div>\n    );\n  }\n}\n\nReactDOM.render(\n  <Chart />,\n  document.getElementById('root'),\n);";
+var code5 =
+  "import React from 'react';\nimport FusionCharts from 'fusioncharts';\nimport TimeSeries from 'fusioncharts/fusioncharts.timeseries';\nimport ReactFC from '../lib/ReactFC';\n\nReactFC.fcRoot(FusionCharts, TimeSeries);\n\nconst jsonify = res => res.json();\nconst dataFetch = fetch(\n  'https://raw.githubusercontent.com/fusioncharts/dev_centre_docs/master/assets/datasources/fusiontime/online-sales-single-series-area-data-plot/data.json'\n).then(jsonify);\nconst schemaFetch = fetch(\n  'https://raw.githubusercontent.com/fusioncharts/dev_centre_docs/master/assets/datasources/fusiontime/online-sales-single-series-area-data-plot/schema.json'\n).then(jsonify);\n\nclass ChartViewer extends React.Component {\n  constructor(props) {\n    super(props);\n    this.onFetchData = this.onFetchData.bind(this);\n    this.state = {\n      timeseriesDs: {\n        type: 'timeseries',\n        renderAt: 'container',\n        width: '600',\n        height: '400',\n        dataSource: {\n          caption: { text: 'Online Sales of a SuperStore in the US' },\n          data: null,\n          yAxis: [\n            {\n              plot: [\n                {\n                  value: 'Sales ($)'\n                }\n              ]\n            }\n          ]\n        }\n      }\n    };\n  }\n\n  componentDidMount() {\n    this.onFetchData();\n  }\n\n  onFetchData() {\n    Promise.all([dataFetch, schemaFetch]).then(res => {\n      const data = res[0];\n      const schema = res[1];\n      const fusionTable = new FusionCharts.DataStore().createDataTable(\n        data,\n        schema\n      );\n      const timeseriesDs = Object.assign({}, this.state.timeseriesDs);\n      timeseriesDs.dataSource.data = fusionTable;\n      this.setState({\n        timeseriesDs\n      });\n    });\n  }\n\n  render() {\n    return (\n      <div>\n        {this.state.timeseriesDs.dataSource.data ? (\n          <ReactFC {...this.state.timeseriesDs} />\n        ) : (\n          'loading'\n        )}\n      </div>\n    );\n  }\n}";
 
 class Banner extends React.Component {
   render() {
@@ -140,27 +154,39 @@ class Banner extends React.Component {
         <div className="row">
           <div className="col-12 pt-3">
             <div className="h5">
-              <span>Step 1: Install the React-FusionCharts wrapper framework</span>
+              <span>
+                Step 1: Install the React-FusionCharts wrapper framework
+              </span>
             </div>
-            <p className="code-desc">In the terminal run the following command:</p>
+            <p className="code-desc">
+              In the terminal run the following command:
+            </p>
             <div className="code-view mt-2">
               <div className="card-shadow">
                 <div className="card-body p-0">
                   <div className="code-panel">
                     <div className="codeMirrorDiv" id="c1">
-                      <CodeMirror value={'$ npm install react-fusioncharts --save'} options={options} />
+                      <CodeMirror
+                        value={'$ npm install react-fusioncharts --save'}
+                        options={options}
+                      />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <p className="code-desc">Also install fusionCharts, if it is not already installed:</p>
+            <p className="code-desc">
+              Also install fusionCharts, if it is not already installed:
+            </p>
             <div className="code-view mt-2">
               <div className="card-shadow">
                 <div className="card-body p-0">
                   <div className="code-panel">
                     <div className="codeMirrorDiv" id="c2">
-                      <CodeMirror value={'$ npm install fusioncharts --save'} options={options} />
+                      <CodeMirror
+                        value={'$ npm install fusioncharts --save'}
+                        options={options}
+                      />
                     </div>
                   </div>
                 </div>
@@ -171,9 +197,28 @@ class Banner extends React.Component {
         <div className="row">
           <div className="col-12 pt-3">
             <div className="h5">
-              <span>Step 2: Import the <a href="//www.npmjs.com/package/react-fusioncharts" target="_blank">ReactFC</a> component</span>
+              <span>
+                Step 2: Import the{' '}
+                <a
+                  href="//www.npmjs.com/package/react-fusioncharts"
+                  target="_blank"
+                >
+                  ReactFC
+                </a>{' '}
+                component
+              </span>
             </div>
-            <p className="code-desc">After installing <a className="ref-link" href="//www.npmjs.com/package/react-fusioncharts" target="_blank">react-fusioncharts</a>, import it in your React app:</p>
+            <p className="code-desc">
+              After installing{' '}
+              <a
+                className="ref-link"
+                href="//www.npmjs.com/package/react-fusioncharts"
+                target="_blank"
+              >
+                react-fusioncharts
+              </a>
+              , import it in your React app:
+            </p>
             <div className="code-view mt-2">
               <div className="card-shadow">
                 <div className="card-body p-0">
@@ -193,7 +238,10 @@ class Banner extends React.Component {
             <div className="h3 mt-2">Render FusionMaps</div>
           </div>
         </div>
-        <p className="code-desc">To render a map, import the FusionMaps module along with the map definition.</p>
+        <p className="code-desc">
+          To render a map, import the FusionMaps module along with the map
+          definition.
+        </p>
         <div className="row">
           <div className="col-12">
             <div className="code-view mt-2">
@@ -214,7 +262,10 @@ class Banner extends React.Component {
             <div className="h3 mt-2">Working with Events</div>
           </div>
         </div>
-        <p className="code-desc mb-1">To attach event callbacks to a FusionCharts component, follow the pattern below.</p>
+        <p className="code-desc mb-1">
+          To attach event callbacks to a FusionCharts component, follow the
+          pattern below.
+        </p>
         <p className="code-desc mb-1">Write the callback:</p>
         <p className="code-desc mb-0">As a separate function:</p>
         <div className="row">
@@ -224,7 +275,12 @@ class Banner extends React.Component {
                 <div className="card-body p-0">
                   <div className="code-panel">
                     <div className="codeMirrorDiv" id="c5">
-                      <CodeMirror value={'var chartEventCallback  = function (eventObj, dataObj) {\n  [Code goes here]\n}'} options={options} />
+                      <CodeMirror
+                        value={
+                          'var chartEventCallback  = function (eventObj, dataObj) {\n  [Code goes here]\n}'
+                        }
+                        options={options}
+                      />
                     </div>
                   </div>
                 </div>
@@ -240,7 +296,12 @@ class Banner extends React.Component {
                 <div className="card-body p-0">
                   <div className="code-panel">
                     <div className="codeMirrorDiv" id="c6">
-                      <CodeMirror value={'chartEventCallback (eventObj, dataObj) {\n  [Code goes here]\n}'} options={options} />
+                      <CodeMirror
+                        value={
+                          'chartEventCallback (eventObj, dataObj) {\n  [Code goes here]\n}'
+                        }
+                        options={options}
+                      />
                     </div>
                   </div>
                 </div>
@@ -248,7 +309,9 @@ class Banner extends React.Component {
             </div>
           </div>
         </div>
-        <p className="code-desc mb-0 mt-2">Attach the callback to an event through the React-FC component:</p>
+        <p className="code-desc mb-0 mt-2">
+          Attach the callback to an event through the React-FC component:
+        </p>
         <div className="row">
           <div className="col-12">
             <div className="code-view mt-2">
@@ -256,7 +319,12 @@ class Banner extends React.Component {
                 <div className="card-body p-0">
                   <div className="code-panel">
                     <div className="codeMirrorDiv" id="c7">
-                      <CodeMirror value={'<ReactFC {...chartConfigs} fcEvent-EVENTNAME={this.chartEventCallback} />'} options={options} />
+                      <CodeMirror
+                        value={
+                          '<ReactFC {...chartConfigs} fcEvent-EVENTNAME={this.chartEventCallback} />'
+                        }
+                        options={options}
+                      />
                     </div>
                   </div>
                 </div>
@@ -264,8 +332,12 @@ class Banner extends React.Component {
             </div>
           </div>
         </div>
-        <p className="code-desc">Where, EVENTNAME is to be replaced by the event you want to track.</p>
-        <div className="h6">Consider the example below that tracks hover events on a data plot.</div>
+        <p className="code-desc">
+          Where, EVENTNAME is to be replaced by the event you want to track.
+        </p>
+        <div className="h6">
+          Consider the example below that tracks hover events on a data plot.
+        </div>
         <div className="row">
           <div className="col-12">
             <div className="code-view mt-2">
@@ -287,7 +359,11 @@ class Banner extends React.Component {
             <div className="h3 mt-2">Working with APIs</div>
           </div>
         </div>
-        <p className="code-desc mb-1">To call APIs we will need the chart object. To get the chart object for an React-FC component, pass a callback through the attribute onRender.</p>
+        <p className="code-desc mb-1">
+          To call APIs we will need the chart object. To get the chart object
+          for an React-FC component, pass a callback through the attribute
+          onRender.
+        </p>
         <p className="code-desc mb-1">Write the callback:</p>
         <p className="code-desc mb-0">As a separate function:</p>
         <div className="row">
@@ -297,7 +373,12 @@ class Banner extends React.Component {
                 <div className="card-body p-0">
                   <div className="code-panel">
                     <div className="codeMirrorDiv" id="c9">
-                      <CodeMirror value={'var chartRenderCallback  = function (chart) {\n  [Code goes here]\n}'} options={options} />
+                      <CodeMirror
+                        value={
+                          'var chartRenderCallback  = function (chart) {\n  [Code goes here]\n}'
+                        }
+                        options={options}
+                      />
                     </div>
                   </div>
                 </div>
@@ -313,7 +394,12 @@ class Banner extends React.Component {
                 <div className="card-body p-0">
                   <div className="code-panel">
                     <div className="codeMirrorDiv" id="c10">
-                      <CodeMirror value={'chartRenderCallback (chart) {\n  [Code goes here]\n}'} options={options} />
+                      <CodeMirror
+                        value={
+                          'chartRenderCallback (chart) {\n  [Code goes here]\n}'
+                        }
+                        options={options}
+                      />
                     </div>
                   </div>
                 </div>
@@ -321,7 +407,10 @@ class Banner extends React.Component {
             </div>
           </div>
         </div>
-        <p className="code-desc mb-0 mt-2">Pass the callback as a prop, to which the chart object will be returned on rendering:</p>
+        <p className="code-desc mb-0 mt-2">
+          Pass the callback as a prop, to which the chart object will be
+          returned on rendering:
+        </p>
         <div className="row">
           <div className="col-12">
             <div className="code-view mt-2">
@@ -329,7 +418,12 @@ class Banner extends React.Component {
                 <div className="card-body p-0">
                   <div className="code-panel">
                     <div className="codeMirrorDiv" id="c11">
-                      <CodeMirror value={'<ReactFC {...chartConfigs} onRender={chartRenderCallback} />'} options={options} />
+                      <CodeMirror
+                        value={
+                          '<ReactFC {...chartConfigs} onRender={chartRenderCallback} />'
+                        }
+                        options={options}
+                      />
                     </div>
                   </div>
                 </div>
@@ -337,7 +431,10 @@ class Banner extends React.Component {
             </div>
           </div>
         </div>
-        <div className="h6 mt-2">Consider the example below that converts a Column 2D chart to a Pie 2D chart after 5 seconds.</div>
+        <div className="h6 mt-2">
+          Consider the example below that converts a Column 2D chart to a Pie 2D
+          chart after 5 seconds.
+        </div>
         <div className="row">
           <div className="col-12">
             <div className="code-view mt-2">
@@ -354,27 +451,87 @@ class Banner extends React.Component {
           </div>
         </div>
 
+        <div className="row pt-3">
+          <div className="col">
+            <div className="h3 mt-2">Usage and integration of FusionTime</div>
+          </div>
+        </div>
+        <p className="code-desc">
+          From <span className="code">fusioncharts@3.13.3-sr.1</span> and{' '}
+          <span className="code">react-fusioncharts@3.0.0</span>, You can
+          visualize timeseries data easily on react.
+        </p>
+        <div className="h6 mt-2">
+          Consider the example below for integration of FusionTime
+        </div>
+        <div className="row">
+          <div className="col-12">
+            <div className="code-view mt-2">
+              <div className="card-shadow">
+                <div className="card-body p-0">
+                  <div className="code-panel">
+                    <div className="codeMirrorDiv" id="c4">
+                      <CodeMirror value={code5} options={options} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="row">
           <div className="col-12 pt-3">
             <div className="h5">Support</div>
             <p>
-              <a className="ref-link" href="//github.com/fusioncharts/react-fusioncharts-component/issues" target="_blank">GitHub Issues</a>&nbsp;|&nbsp;
-              <a className="ref-link" href="mailto:support@fusioncharts.com" target="_blank">Contact FusionCharts Support</a>
+              <a
+                className="ref-link"
+                href="//github.com/fusioncharts/react-fusioncharts-component/issues"
+                target="_blank"
+              >
+                GitHub Issues
+              </a>
+              &nbsp;|&nbsp;
+              <a
+                className="ref-link"
+                href="mailto:support@fusioncharts.com"
+                target="_blank"
+              >
+                Contact FusionCharts Support
+              </a>
             </p>
           </div>
         </div>
         <div className="row">
           <div className="col-12 pt-3">
             <div className="h5">Licensing</div>
-            <p>React-FusionCharts module is licensed under open-source, distributed under the terms of the MIT/X11 License. You will
-              still need to include FusionCharts in your page, as this project provides no direct functionality. You can download
-              a free evaluation version&nbsp;
-              <a className="ref-link" href="//www.fusioncharts.com/download/" target="_blank">here</a>. To use in a commercial environment, please&nbsp;
-              <a className="ref-link" href="//www.fusioncharts.com/buy/" target="_blank">purchase a FusionCharts license</a>.</p>
+            <p>
+              React-FusionCharts module is licensed under open-source,
+              distributed under the terms of the MIT/X11 License. You will still
+              need to include FusionCharts in your page, as this project
+              provides no direct functionality. You can download a free
+              evaluation version&nbsp;
+              <a
+                className="ref-link"
+                href="//www.fusioncharts.com/download/"
+                target="_blank"
+              >
+                here
+              </a>
+              . To use in a commercial environment, please&nbsp;
+              <a
+                className="ref-link"
+                href="//www.fusioncharts.com/buy/"
+                target="_blank"
+              >
+                purchase a FusionCharts license
+              </a>
+              .
+            </p>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
