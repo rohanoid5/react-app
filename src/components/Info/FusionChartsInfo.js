@@ -139,10 +139,8 @@ var code4 =
   "import React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport FusionCharts from 'fusioncharts';\nimport Charts from 'fusioncharts/fusioncharts.charts';\nimport ReactFC from 'react-fusioncharts';\nimport FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';\n\nReactFC.fcRoot(FusionCharts, Charts, FusionTheme);\n\nconst myDataSource = " +
   JSON.stringify(chartJSON, null, '\t') +
   ";\n\nconst chartConfigs = {\n  type: 'column2d',\n  width: 600,\n  height: 400,\n  dataFormat: 'json',\n  dataSource: myDataSource,\n};\n\nclass Chart extends Component {\n  // Convert the chart to a 2D Pie chart after 5 secs.\n  alterChart(chart) {\n    setTimeout(() => {\n      chart.chartType('pie2d');\n    }, 5000);\n  }\n\n  render() {\n    return (\n      <div>\n        <ReactFC {...chartConfigs} onRender={alterChart} />\n      </div>\n    );\n  }\n}\n\nReactDOM.render(\n  <Chart />,\n  document.getElementById('root'),\n);";
-var code5 =
-  "import React from 'react';\nimport FusionCharts from 'fusioncharts';\nimport TimeSeries from 'fusioncharts/fusioncharts.timeseries';\nimport ReactFC from '../lib/ReactFC';\n\nReactFC.fcRoot(FusionCharts, TimeSeries);\n\nconst jsonify = res => res.json();\nconst dataFetch = fetch(\n  'https://raw.githubusercontent.com/fusioncharts/dev_centre_docs/master/assets/datasources/fusiontime/online-sales-single-series-area-data-plot/data.json'\n).then(jsonify);\nconst schemaFetch = fetch(\n  'https://raw.githubusercontent.com/fusioncharts/dev_centre_docs/master/assets/datasources/fusiontime/online-sales-single-series-area-data-plot/schema.json'\n).then(jsonify);\n\nclass ChartViewer extends React.Component {\n  constructor(props) {\n    super(props);\n    this.onFetchData = this.onFetchData.bind(this);\n    this.state = {\n      timeseriesDs: {\n        type: 'timeseries',\n        renderAt: 'container',\n        width: '600',\n        height: '400',\n        dataSource: {\n          caption: { text: 'Online Sales of a SuperStore in the US' },\n          data: null,\n          yAxis: [\n            {\n              plot: [\n                {\n                  value: 'Sales ($)'\n                }\n              ]\n            }\n          ]\n        }\n      }\n    };\n  }\n\n  componentDidMount() {\n    this.onFetchData();\n  }\n\n  onFetchData() {\n    Promise.all([dataFetch, schemaFetch]).then(res => {\n      const data = res[0];\n      const schema = res[1];\n      const fusionTable = new FusionCharts.DataStore().createDataTable(\n        data,\n        schema\n      );\n      const timeseriesDs = Object.assign({}, this.state.timeseriesDs);\n      timeseriesDs.dataSource.data = fusionTable;\n      this.setState({\n        timeseriesDs\n      });\n    });\n  }\n\n  render() {\n    return (\n      <div>\n        {this.state.timeseriesDs.dataSource.data ? (\n          <ReactFC {...this.state.timeseriesDs} />\n        ) : (\n          'loading'\n        )}\n      </div>\n    );\n  }\n}";
 
-class Banner extends React.Component {
+class BannerFusionCharts extends React.Component {
   render() {
     return (
       <div className="container container-1200 info-wrapper pt-4">
@@ -451,35 +449,6 @@ class Banner extends React.Component {
           </div>
         </div>
 
-        <div className="row pt-3">
-          <div className="col">
-            <div className="h3 mt-2">Usage and integration of FusionTime</div>
-          </div>
-        </div>
-        <p className="code-desc">
-          From <span className="code">fusioncharts@3.13.3-sr.1</span> and{' '}
-          <span className="code">react-fusioncharts@3.0.0</span>, You can
-          visualize timeseries data easily on react.
-        </p>
-        <div className="h6 mt-2">
-          Consider the example below for integration of FusionTime
-        </div>
-        <div className="row">
-          <div className="col-12">
-            <div className="code-view mt-2">
-              <div className="card-shadow">
-                <div className="card-body p-0">
-                  <div className="code-panel">
-                    <div className="codeMirrorDiv" id="c4">
-                      <CodeMirror value={code5} options={options} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div className="row">
           <div className="col-12 pt-3">
             <div className="h5">Support</div>
@@ -535,4 +504,4 @@ class Banner extends React.Component {
   }
 }
 
-export default Banner;
+export default BannerFusionCharts;

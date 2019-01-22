@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import FusionCharts from "fusioncharts/core";
-import DragColumn2D from "fusioncharts/viz/dragcolumn2d";
-import ReactFC from "react-fusioncharts";
-import FusionTheme from "fusioncharts/themes/es/fusioncharts.theme.fusion";
+import React, { Component } from 'react';
+import FusionCharts from 'fusioncharts';
+import PowerCharts from 'fusioncharts/fusioncharts.powercharts';
+import ReactFC from 'react-fusioncharts';
+import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 
-import data from "./data.json";
+import data from './data.json';
 
-ReactFC.fcRoot(FusionCharts, DragColumn2D, FusionTheme);
+ReactFC.fcRoot(FusionCharts, PowerCharts, FusionTheme);
 
 const chartConfigs = {
-  type: "dragcolumn2d",
-  width: "100%",
-  height: "85%",
-  dataFormat: "json",
+  type: 'dragcolumn2d',
+  width: '100%',
+  height: '85%',
+  dataFormat: 'json',
   dataSource: data
 };
 
@@ -21,7 +21,8 @@ class Chart extends Component {
     super(props);
 
     this.state = {
-      message: "Drag any column for years 2017 or 2018 to see updated value along with the label",
+      message:
+        'Drag any column for years 2017 or 2018 to see updated value along with the label',
       chart: {}
     };
 
@@ -36,15 +37,17 @@ class Chart extends Component {
   dataplotDragEnd(eventObj, dataObj) {
     var prevValue = FusionCharts.formatNumber(dataObj.startValue.toFixed(2));
     var curValue = FusionCharts.formatNumber(dataObj.endValue.toFixed(2));
-    var labelYear = this.state.chart.args.dataSource.categories[0].category[dataObj.dataIndex].label;
+    var labelYear = this.state.chart.args.dataSource.categories[0].category[
+      dataObj.dataIndex
+    ].label;
     this.setState({
       message: [
         <strong>{eventObj.data.datasetName}</strong>,
-        " is modified to ",
-        <strong>{"$" + curValue + "M"}</strong>,
-        " from ",
-        <strong>{"$" + prevValue + "M"}</strong>,
-        " for ",
+        ' is modified to ',
+        <strong>{'$' + curValue + 'M'}</strong>,
+        ' from ',
+        <strong>{'$' + prevValue + 'M'}</strong>,
+        ' for ',
         <strong>{labelYear}</strong>
       ]
     });
@@ -58,7 +61,7 @@ class Chart extends Component {
           onRender={this.renderComplete}
           fcEvent-dataplotDragEnd={this.dataplotDragEnd}
         />
-        <p style={{ padding: "10px", background: "#f5f2f0" }}>
+        <p style={{ padding: '10px', background: '#f5f2f0' }}>
           {this.state.message}
         </p>
       </div>
