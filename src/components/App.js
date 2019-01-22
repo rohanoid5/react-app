@@ -19,14 +19,6 @@ import 'prismjs/themes/prism.css';
 class App extends Component {
   constructor(props) {
     super(props);
-
-    var locationArr = window.location.pathname.split('/');
-    if (locationArr.length < 3)
-      localStorage.setItem('isFusionTime', 'fusioncharts');
-
-    this.state = {
-      isFusionTime: localStorage.getItem('isFusionTime') === 'timeseries'
-    };
   }
 
   render() {
